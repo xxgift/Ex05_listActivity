@@ -2,6 +2,7 @@ package com.egco428.ex05_listactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -9,6 +10,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val courseTitle = intent.getStringExtra("courseTitle")
         val courseDesc = intent.getStringExtra("courseDesc")
         val courseImg = intent.getIntExtra("courseIcon",0)
@@ -20,5 +22,13 @@ class DetailActivity : AppCompatActivity() {
         courseIcon.setImageResource(res)
         courseNo.text = "Course No#: \n$courseNumber"
         creditt.text = "Credits: \n$courseCredit"
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item!!.itemId
+        if(id == android.R.id.home){
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
